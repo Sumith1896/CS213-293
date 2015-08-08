@@ -1,0 +1,34 @@
+This is an extension of a problem from the World Finals of the ICPC 2015.
+
+Let f(1), f(2), ....,  f(n) be a sequence of real numbers.
+
+Define a fall in the sequence as a pair of numbers (i, j) such that 
+1 <= i < j <= n, and f(i) >= f(j). The value of a fall (i,j) is f(i)-f(j).
+The problem is to compute for a given sequence f, the maximum value of a
+fall. If there is no fall, then this value is 0.
+
+In the ICPC problem, the sequence f is defined by 
+f(i) = p * (sin(a*i+b) + cos(c*i+d) + 2) for 1 <= i <= n.
+where p, a, b, c, d, n are integer values.
+It is given that p,a,b,c,d are all integers between 1 and 1000 (inclusive)
+and 1 <= n <= 1000000. The time limit was 5 seconds. The answer should
+be printed correct to 6 decimal places.
+
+The test cases for the ICPC problem are available at
+
+www.cse.iitb.ac.in/~aad/cs293/Assign1
+
+For the lab problem, you should assume an arbitrary function f will be defined.
+You only need to declare it as an external function that takes an int and
+returns a double. Your program should only read the value of n. For testing, 
+you can use the function in the ICPC problem, but remove it from your program 
+before submitting.  Also, for the lab, n may be as large as 100000000, and the 
+time limit will be 10 sec.
+
+You should also compute the maximum rate of fall, that is, the maximum
+over all falls (i,j) of (f(i)-f(j))/(j-i). Again, the value is 0 if there
+is no fall.
+
+Output two double values, correct to 6 decimal places, on separate lines.
+
+Submit your program on moodle as a single file named RollNo_1.cpp

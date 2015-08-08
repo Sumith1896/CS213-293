@@ -1,0 +1,81 @@
+
+			Recursive Definitions
+
+1. The Ackermann function A(m,n) is defined recursively as follows.
+
+   A(0,n) = succ(n)  for all natural numbers n.
+   A(m,0) = A(m-1,1) for all numbers m > 0.
+   A(m,n) = A(m-1, A(m,n-1)) for all m, n > 0.
+
+   Show that this function is well-defined for all natural numbers m,n.
+   This function grows very rapidly with m and n. Estimate the value of
+   A(4,2).
+
+
+2. Consider the function f(n) that satisfies the following properties.
+
+   f(0) = f(1) = 1;
+   f(n) = f(n/2) if n > 1 and n is even.
+   f(n) = f(3n+1)  if n > 1 and n  is odd.
+ 	
+   Is this a valid definition  of a function? Why or why not? It is a
+   more than 300 year old problem, known as the Collatz problem, to
+   show that the only function that satisfies these properties is
+   the function f(n) = 1 for all n.
+
+   Suppose we change the last property to 
+
+    f(n) = f(n+99) if n > 1 and n is odd.
+
+   What is the maximum number of distinct values that the function f can
+   take?
+
+
+3. Using only the successor function, define the function prime(n),
+   which returns true if n is a prime number and false otherwise. You may need
+   to define several intermediate functions for this.
+
+
+4. Consider the following definition of the longest increasing subsequence
+   function.
+
+   lis(empty) = 0;
+   lis(push(x,S)) = max(lis(S), 1+ lis(remove(x,S));
+
+   remove(x,empty) = empty;
+   remove(x,push(y,S)) = remove(x,S) if y <= x
+                       = push(y,remove(x,S)) if y > x. 
+
+   Suppose we try to recursively evaluate lis(S) for a sequence S of
+   length n? What is the maximum number of different sequences for
+   which we will need to evaluate the lis function?
+
+
+5. A sequence S1 is said to be a substring of a sequence S2 if 
+   is_substring(S1,S2) is true, where the is_substring function is defined
+   as follows.
+
+   is_substring(empty,S2) = true for all sequences S2.
+   is_substring(push(x,S1), empty) = false for all sequences S1.
+   is_substring(push(x,S1),push(y,S2)) = is_substring(push(x,S1),S2) ||
+                                         is_prefix(push(x,S1),push(y,S2));
+
+   is_prefix(empty,S2) = true for all S2
+   is_prefix(push(x,S1),empty) = false;
+   is_prefix(push(x,S1),push(y,S2)) = (x == y) && is_prefix(S1,S2).
+
+   Write a function lis(S) that returns the length of the longest
+   increasing substring of S.
+
+
+6. Suppose a_1, a_2,....,a_n and b_1, b_2,...b_m are two sequences.
+   An interleaving of the two sequences is a sequence that can be obtained
+   by taking some elements of the sequence a from the beginning, followed
+   by some elements of b, again followed by some of the remaining elements of
+   a and so on. Thus if a is the sequence 1 2 3 4 and b is the sequence
+   2 1 4 3 then 1 2 1 2 3 4 3 4 is an interleaving of the two sequences.
+
+   Formalize this idea by defining a function
+
+   interleave(S1,S2,S3) that returns true if and only if S3 is obtained
+   by interleaving S1 and S2.

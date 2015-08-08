@@ -1,0 +1,69 @@
+This problem is an example of a technique for designing algorithms known
+as dynamic programming.But this is just a careful implementation of a
+recursive algorithm.
+
+The input consists of two sequences of integers a_1, a_2, ..., a_n and
+b_1, b_2, ..., b_m. It is required to find the shortest substring of the
+first sequence, which contains the second sequence as a subsequence. A
+substring of a sequence contains some consecutive elements of the
+sequence, while a subsequence contains any subset of the elements, in the
+same order.
+
+Let L[i,j] denote the length of the shortest prefix of the sequence a_i,
+a_{i+1}, ..., a_n that contains b_j, b_{j+1},..., b_m as a subsequence.
+Let L[i,j] = infinity if there is no such prefix. We can compute the
+entries L[i,j] as follows.
+
+L[n,m] = 1 if a_n == b_m and infinity otherwise.
+
+L[i,m] = 1 if a_i == b_m otherwise it is 1+L[i+1,m], for 1 <= i < n;
+
+L[n,j] = infinity for all j < m.
+
+L[i,j] = 1 + L[i+1,j+1] if a_i == b_j, otherwise it is 1 + L[i+1,j] for
+all 1 <= i < n, 1 <= j < m.
+
+The final answer is the minimum of L[i,1] for 1 <= i <= n.
+
+This gives a straightforward way of evaluating the answer, by computing
+the L matrix, columnwise starting from the last column, Note that to
+compute the ith column, only the entries in the (i+1)th column are needed,
+so there is no need to store the whole matrix. This would work for at
+least half the cases.
+
+There are many ways of speeding up this algorithm, by avoiding computation
+of some of the L[i,j]'s. Try to think of some faster ways of doing this.
+
+Input Format
+The first line will specify the lengths of the two sequences n and m.
+The next line will contain n integers, separated by a space, giving the
+first sequence. The next line will specify the m integers in the second
+sequence.
+
+Output Format
+The output should contain a single line with two integers, the first is
+the length of the shortest substring, and the second is the starting
+position of the substring in the first sequence. If there is more than one
+possible starting position, print the smallest possible value. If the
+second sequence is not a subsequence of the first, print infinity. Note
+that positions are numbered from 1.
+
+Example
+Input 1
+5 3
+1 3 6 2 7
+3 2 7
+
+Output 1
+4 2
+
+Input 2
+6 2
+1 2 2 1 2 1
+1 1
+
+Output 2
+3 4
+
+
+Some more test cases are at www.cse.iitb.ac.in/~aad/cs293/Assign3.
