@@ -1,0 +1,48 @@
+		Problem G ICPC World Finals 2014.
+
+The formal statement of the problem is as follows. The input consists of
+a graph with n nodes and specified distances d(i,j) between nodes i and j,
+for all 1 <= i,j <= n. For a subset A of nodes, the disparity of the subset
+A is the maximum distance between two nodes in the subset A. The problem
+is to find a partition of the nodes into 2 parts A and B such that
+disparity(A) + disparity(B) is minimized.
+
+Input
+The input consists of a single test case. The first line contains an integer n 
+(1 <=  n <= 200) indicating the number of nodes. The following n-1 lines 
+contain the distances d(i,j). The ith of these lines contains n-i integers and 
+the jth integer of that line gives the value of d(i,i + j). The distances are
+symmetric, so d(j,i) = d(i,j), and also d(i,i) = 0 for all i. All distances are 
+integers between 0 and 10^9 (inclusive).
+
+Output
+
+Display the minimum possible sum of disparities for partitioning the nodes.
+
+
+Sample Input 1          Sample Output 1
+5				4
+4 5 0 2
+1 3 7
+2 0
+4
+
+
+Sample Input 2		Sample Output 2
+7				15
+1 10 5 5 5 5
+5 10 5 5 5
+100 100 5 5
+10 5 5
+98 99
+3
+
+Time Limit 4 sec.
+
+Submit as RoLLNo_11.cpp by Monday 27th October.
+I will give hints if needed in Monday's Lab/class.
+Test cases from the world finals are available
+at www.cse.iitb.ac.in/~aad/cs293/Assign11.
+
+
+WARNING: IF COPYING IS DETECTED I WILL GIVE AN FR GRADE IMMEDIATELY.

@@ -1,0 +1,85 @@
+                              Simple Polygons.
+
+This problem is a generalization of the standard sorting problem.
+Suppose you are given n distinct points in the plane, specified
+by their x- and y-coordinates. The points are numbered 0 to n-1.
+Assume that no line contains all the points.
+The problem is to find an ordering of the points, such that no
+two line-segments joining consecutive points, or the first and
+last point intersect. In other words, a simple polygon is to be
+constructed whose vertices are the given points.
+
+In general, such an ordering always exists but may not be unique, 
+and there are many ways of finding one. One such forms what is 
+called a star polygon. Take 3 non-collinear points and choose
+a point x, different from the given points, inside the triangle 
+formed by them. Sort all the points in clockwise order around the 
+point x, and join consecutive points in this order. (You will have 
+to take care if x and two of the given points are collinear.)
+
+While this gives a simple polygon, the polygon will not
+"look nice" in general. It will have many sharp corners.
+
+
+Another way is to construct what is called a monotone
+simple polygon. A simple polygon is monotone in the
+x-direction, if as we move along the boundary, starting
+from a point with minimum x-coordinate, the x-coordinate
+never decreases till we reach a point with maximum 
+x-coordinate, and after that it never increases.
+Show that it is always possible to construct a monotone
+simple polygon.
+
+Both these methods require sorting points based on some
+criterion. You should use the sort function defined in
+the algorithm class.  This function takes two iterators
+specifying the range to be sorted, and also a function
+object that determines the criterion for sorting.
+You can sort the same sequence based on different criteria
+by supplying different comparison objects.
+
+Define a comparison object as:
+
+struct compare_points {
+	bool operator()(point const &p, point const &q)
+	{
+	// define when p < q is true.
+	}
+};
+
+To sort a vector v of points, call sort(v.begin(), v.end(), compare_points());
+You can define different comparison objects to sort by different criteria.
+
+
+Input
+The first line will contain n, the number of points.
+The next line will contain 2n numbers, the x- and y-coordinates
+of the points 0,1,2,..,n-1 in this order. There may be about 10^6
+points and the coordinates will be at most 10^4.
+
+Output
+Output 2 permutations of 0,1,...,n-1, one on each line, with
+a blank between two consecutive numbers. Only the point numbers
+should be output, and not the coordinates.
+The first permutation should form a star simple polygon and the
+second a monotone simple polygon.
+
+Example
+Input
+5
+2 1 2 4 1 2 4 0 0 0
+
+Output
+4 0 2 1 3
+4 2 1 3 0
+
+Input
+9
+1 1 0 1 0 2 2 0 1 0 0 0 1 2 2 1 2 2
+
+Output
+5 1 2 6 8 7 0 3 4
+5 1 2 6 8 7 3 4 0
+
+
+Submit your file as RollNo_3.cpp

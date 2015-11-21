@@ -1,0 +1,33 @@
+		An efficient data structure
+
+This problem involves implementing an efficient data structure to represent
+a Sequence of integers S.
+
+The only operations to be performed on the sequence are:
+
+Sequence(n,x) : construct a sequence with n elements, all having integer value x.
+
+S(i,j,x) : Assign value x to all the elements S[i], S[i+1],...,S[j-1], S[j].
+
+S[i] : return the current value of S[i].
+
+
+The sequence may have length up to 10^6, and there may be about 10^6 operations
+performed in any order.  
+
+You have to only write a class Sequence that implements these operations.
+
+To make the operations efficient, use a segment tree to represent the
+sequence. This is a vector of vectors, in which the last vector stores
+the actual sequence and has size n. The first vector has only one element.
+
+Each element of the vectors stores an integer value along with a boolean
+value. If the boolean value is true, it indicates that all leaf nodes in
+the subtree rooted at that node have the value stored in the node. If the
+boolean is false, the integer value has no meaning.
+
+Using this representation, show how you can perform the operations in
+O(log n) time.
+
+NOTE: Name your class Sequence and do not keep any main function.
+Submit a single file named RollNo_6.cpp

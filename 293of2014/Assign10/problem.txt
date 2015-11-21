@@ -1,0 +1,96 @@
+			Exploring an Infinite Graph
+
+
+Consider a hypothetical computer that can store only two integer values.
+When it is switched on, it contains the values 0 and 1. In a single
+step, the computer can add or subtract two numbers currently in its
+memory and replace one of the old numbers by the new number. Thus if
+x and y are the numbers currently in its memory, it can replace either
+x or y by one of 2x, 2y, x+y, x-y, y-x, 0. Starting from the values 0 and
+1, we want to reach the state n, m for some specified numbers n,m.
+It is required to find the minimum number of steps needed.
+
+
+Algorithm
+This problem amounts to finding a shortest path between two nodes in
+an infinite graph. Depth first search cannot be used to even find any
+path in such a graph, as there may be infinite paths in the graph.
+
+Breadth-First search is an alternative search strategy that finds a
+shortest path between two nodes. Start with the initial node, and find
+all the nodes that can be reached in one step. These are essentially
+all the successors of the initial node. Now examine all successors
+of all nodes reachable in one step, If any node is found that has not
+been found earlier, it is reachable in 2 steps, and these are all the
+nodes reachable in 2 steps. Repeat this to find all nodes reachable in
+3 steps. Stop when the destination node is reached. This algorithm is
+guaranteed to terminate in finite time if a finite path exists to
+the destination.
+
+
+Implementation.
+
+The nodes in this graph are unordered pairs of integers, corresponding
+to the two values in the memory. The possible computations define the
+successors. We need to maintain a set of all visited nodes. It may be
+more efficient to use a hash_set<node> to represent this.
+
+You need to include
+
+#include <ext/hash_set>
+using namespace __gnu_cxx
+
+for this.
+
+You will also need to define a hash function for unordered pairs of
+integers. Also, you may need to define an appropriate equality operator for 
+nodes, so that (a,b) and (b,a) are considered equal. Note that their hash 
+values should also be the same. A simple hash function may be |a+b|,
+although it may have too many collisions. A function like c_1*max(|a|,|b|)
++c_2*min(|a|,|b|) may be better. Note that a hash function must have
+non-negative values.
+
+To implement bfs, keep a queue of visited nodes. Take a node from
+the front of the queue, examine all its successors and if any
+unvisited successor is found, insert it at the end of the queue.
+This ensures that successors of nodes reachable in i steps are examined
+before successors of those reachable in i+1 steps. So when the
+destination node is found, a shortest path is found.
+You may also want to store in a node the length of the shortest path
+to the node.
+
+Input:
+Two integers n and  m, assume -10000 <= n, m <= 10000.
+
+Output
+
+A single integer which is the minimum number of steps needed to reach the
+state n, m from 0, 1.
+
+Submit as RollNo_10.cpp
+
+
+Homework.
+There are many variations that you can try at home. First, is it true that
+every state m, m is reachable from 0, 1. You can use your program to test
+this and either prove it or find a counterexample.
+
+
+There are many ways of speeding up the program. Instead of systematically
+going through all nodes reachable in i steps before going to i+1, assign
+priorities to the nodes, so that nodes "more likely" to lead to the
+destination are examined first. So, instead of a queue, use a priority
+queue. One problem here is that although we may reach the destination
+node quickly, it may not be through the shortest path. There is a way
+of assigning priorities that guarantees this will not happen. Otherwise
+you have to continue the search even after finding one path, to see if
+there is a shorter path.
+
+Sometimes, we are happy with paths that are not much longer than the
+shortest path. Can you find a simple algorithm that gives paths that
+are close to shortest, but take much less time to find.
+
+In an abstract sense, this problem essentially defines all possible
+problems in computer science, with appropriate re-definition of
+nodes and successors.
+
