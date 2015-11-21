@@ -1,0 +1,56 @@
+		Shortest Walks in Graphs.
+
+This problem is a variation of the basic shortest path problem on graphs.
+Every edge in  a directed graph is assigned a positive integer cost, as 
+well as a label "good" or "bad". A walk in the graph is considered to be
+good if it contains at least as many good edges as bad edges.
+
+Given a source node s, it is required to find the minimum cost of a good
+walk from s to all other nodes in the graph, if such a walk exists.
+Note that there may not be a good path from s to a node t, but a good
+walk may still exist.
+
+Example
+Consider the graph with vertices 0 to 6 and edges
+(0,1) (1,2) (2,3) (3,4) (4,5) (5,6) (6,0).
+
+Here (0,1) (1,2) and (2,3) are bad edges while all others are good.
+All edges have cost 1.
+
+Then the minimum cost of a good walk from 0 to 3 is 24.
+(Go round the cycle 3 times and then take the path from 0 to 3).
+
+In general, what can be the longest length of a minimum cost good walk?
+Modify the Bellman Ford algorithm for this problem.
+Apart from number of edges in a walk, you may need to keep track of
+the "goodness" of a walk, that is, the number of good edges - the
+number of bad edges.
+
+Input Format
+
+Assume the input will be a complete directed graph.
+The first line will give the number of nodes n.
+Source node is assumed to be 0.
+The next n lines will give the entries in an n by n cost matrix C.
+If C[i,j] is positive, it indicates a bad edge from i to j with
+cost C[i,j], and if it is negative it indicates a good edge with
+cost -C[i,j]. Assume that C[i,j] != 0 for all i,j. There may be
+self-loops in the graph also.
+
+Output Format
+Output the minimum cost of a good walk from 0 to node i, on the ith line.
+If no such walk exists, output "infinity".
+
+Sample Input
+
+1 -5 2
+3 2 -3
+-6 -3 2
+
+Sample Output
+0
+5
+8
+
+Submit your file as RollNo_13.cpp
+

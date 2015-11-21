@@ -1,0 +1,69 @@
+	Efficient Data Structures and Algorithms.	
+
+
+1.  A data structure is required to maintain a set of n boolean
+flags, each of which may be true or false. The operations to be performed
+are:
+
+a) set(i) : set the ith flag to true. 
+b) reset(i) : set the ith flag to false.
+c) test(i) : return the value of the ith flag.
+d) setAll() : set all flags to true. 
+e) resetAll() : set all flags to false. 
+
+Describe a data structure that implements all these operations in O(1)
+time. 
+
+2. A Gray code is a list of all the 2^n n-bit strings such that
+consecutive bit strings differ in only one position. For example, 0,1;
+00, 01, 11, 10; and 000, 001, 011, 010, 110, 111, 101, 100 are Gray codes
+for 1,2 and 3-bit strings, respectively. In general, if L is a Gray code for
+n-bit strings then 0.L, 1.L^r is a Gray code for n+1 bit strings,
+where 0.L denotes the list of bit strings obtained by adding a 0 at the
+beginning of each string in L, L^r denotes the reverse of L and ,
+denotes concatenation. While this gives a recursive construction for the Gray
+code, we would like to generate it iteratively.
+
+(a) Define a function next(S) that takes a bit string S as a
+parameter and returns the bit string that follows it in the Gray code as
+constructed above. If S is the last string in the list, then next(S)
+should return the first string, that is, next(100) = 000. Note that you
+should define the next function abstractly, without assuming any particular
+representation of bit strings. You can define additional functions as needed.
+
+(b) Describe a data structure for representing n-bit strings such
+that the next operation can be performed in O(1) time.
+Your data structure can take O(n) time for initialization,
+but every next operation should modify the value of the string in O(1) time. 
+Note that at any time it should be possible to find the value of the ith bit in
+O(1) time.
+
+3. Consider a data structure that stores a sequence of n integers.
+The operations to be performed on the sequence are:
+
+(i) set(i,x) : sets the ith element to x.
+(ii) find(i) : returns the ith element in the sequence. 
+(iii) All_equal() : returns true if and only if all elements in the
+      sequence are equal.
+
+Describe a data structure that implements these operations in O(1)
+time. Assume that initially, all elements in the sequence are 0,
+and initialization can take O(n) time. Can you do this if another
+operation At_most_two() is required, which returns true iff the
+sequence contains at most two distinct values?
+
+4. Let S be a sequence of n integers, each of which is contained
+in the set {0,1,...,n-1}. A run in S is a substring of
+S consisting of zero or more consecutive occurrences of the same integer. 
+Thus the sequence 0,0,0,1,1,0 contains 6 runs, the empty sequence; 0; 0,0;
+0,0,0; 1 and 1,1. Given S and a non-negative integer k, it is
+required to find the maximum length of the longest run amongst all sequences
+that can be obtained from S by changing at most k elements in S. Note
+that only replacement of an integer in S by another integer in
+{0,1,...,n-1} is allowed. Describe a function l(S,k) that computes
+this value. Describe an O(n) time implementation of this function. 
+
+
+5. Given a sequence S, write a function that computes the number of distinct
+subsequences of S. Show how this can be done in O(nlog n) time.
+Hint: Use sorting.

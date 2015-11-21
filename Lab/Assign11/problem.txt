@@ -1,0 +1,96 @@
+				Error Correcting Codes.
+
+An error correcting code is a way of representing the symbols of an
+alphabet, in such a way that even if a bounded number of errors occur
+in transmitting the symbol, the correct symbol can be decoded.
+Suppose the alphabet is  the characters 'a' to 'z'. Each letter is
+represented by a codeword which is bit string of length n. If the
+codewords are chosen such that any two codewords differ in at least
+2t+1 bits, then even if t bits are changed in transmitting a symbol,
+its correct value can still be decoded.
+
+
+This problem involves using an unordered map to decode the symbols.
+Consider a codeword w that represents the letter 'a'. Then all bit 
+strings that differ from w in at most t bits will also represent the
+letter 'a'. Note that no string can differ from two different codewords
+by at most t bits, since any two codewords differ by at least 2t+1 bits.
+Make a map of bit strings to letters, and whenever a bit string representing
+a symbol is received, look up the map to find the letter it represents, 
+if any.
+
+
+For this problem, we will use a simple code. Each letter can be
+first represented by a 5 bit string, 'a' being 00000, 'b' by 00001, ...,
+'z' by 11001. To get a t error correcting code, simply replicate
+each bit 2t+1 times. We will use t = 4 for this problem.
+Thus 'a' will be represented by 45 0's, 'b' by 36 0's followed by
+9 1's, and so on. Now, any two codewords differ by at least 9 bits,
+so this is a 4 error correcting code.
+
+The problem is to build a decoder for it. The decoder must correctly
+decode the transmitted symbol, assuming that at most 4 errors can
+occur in the transmission. Note that certain bit strings may not
+arise from a codeword, in which case they should be marked as error.
+Note that a 45 bit string will be represented by a long long integer.
+
+Input
+The first line of input will give n, the number of symbols transmitted.
+The next n lines will give a long long integer, one per line,
+indicating the bit string received.
+
+Output
+If a bit string received represents a symbol, with at most 4 errors,
+print out the symbol, otherwise print a ?, to indicate that more
+than 4 errors have occurred, or a wrong codeword transmitted. Print the
+output symbols on the same line without any space.
+
+n may be about 10^7. Try to experiment with different hash functions and 
+adjust the parameters like number of buckets, maximum size of buckets
+etc., to find one that works best for this case.  However, just using the
+default functions in standard unordered_maps will also work.
+But try comparing with an ordinary map based on balanced trees.
+
+
+Sample Input
+3
+15
+510
+527
+
+Output
+ab?
+
+
+
+Note that the code used here is inefficient. The same result can be
+obtained by using codewords of length much less than 45 bits. However,
+constructing such codes is non-trivial.
+
+
+To use unordered_maps, include the file unordered_map.
+While compiling, use the option -std=c++11
+To define your own hash functions,
+
+struct func
+{
+	long long operator()(long long const i) const
+	{
+		return ....;
+	}
+};
+
+and use the func type as the 3rd template parameter in the declaration
+of the map.
+
+In such specific problems, it is possible to spend a lot of time
+coming up with perfect hash functions, such that any bucket has
+size at most 1. Then if at most 4 errors occur, a symbol can be decoded
+in one step. Try examining the bucket sizes obtained by the standard
+hash function, and see if you can reduce them.
+
+The time for constructing the map should be < 5 sec.
+The time for decoding  10^7 symbols should be < 15 sec.
+This is possible using just the standard.
+
+Submit your file as RollNo_11.cpp

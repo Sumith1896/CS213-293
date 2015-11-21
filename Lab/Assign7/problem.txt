@@ -1,0 +1,77 @@
+					Using Sets and Maps
+This assignment shows the use of sets and maps for solving some problems.
+In this problem, we want to maintain information about bank accounts
+in a bank. For each account, we want to maintain the name of the owner
+and the current balance left. Assume that names are unique. The operations
+to be performed are:
+1) Deposit specified amount in a specified account.
+2) Withdraw specified amount from a specified account.
+3) Open a new account.
+4) Close an existing account.
+5) Print names of all accounts with balance in a specified range of values.
+
+
+This is similar to assignment 4 except that instead of increment and 
+decrement, the balance can increase/decrease by arbitrary amounts, and
+the objects are identified by names rather than numbers. This requires
+the use of sets and maps.
+
+
+We use two maps, one which maps the account name to the current balance and
+another that maps the balance to a set of names that have that balance.
+These are declared as
+
+map<string,int> : maps a string to an int.
+map<int, set<string> > : maps an int to a set of strings.
+
+Assume that names are strings and balance is an int.
+The required operations can now be implemented easily using the
+available operations on maps and sets. You can find information
+about them at 
+http://www.cse.iitb.ac.in/~aad/cs213/STL_doc/Map.html
+
+and
+
+http://www.cse.iitb.ac.in/~aad/cs213/STL_doc/set.html
+
+
+Input Format
+The input will specify a sequence of operations to be performed, one
+per line. The operation will be identified by a single character,
+O for open, C for close, D for deposit, W for withdraw and
+P for print.
+
+In the case of O, C, D, W operations the account name will be specified
+next, separated by a space. For D and W, the amount to be deposited/
+withdrawn will be specified next. For P operation the range of values
+of the balance will be specified. For each possible balance value in the
+range, print the value and the names of accounts with that balance in
+sorted order, one value per line.
+
+Some operations are considered illegal. These are opening an account 
+with an already existing name, closing an account with non-zero balance,
+withdrawing an amount more than the current balance, depositing or
+withdrawing from a non-existing account etc. All such operations
+should do nothing, and finally a count of the number of illegal
+operations should be printed.
+
+Sample Input
+O xyz
+O pqr
+D xyz 1000
+W pqr 100
+W xyz 500
+D pqr 500
+O stu
+P 0 1000
+C pqr
+
+Sample Output
+0 stu
+500 pqr xyz
+2
+
+
+Submit your file as RollNo_7.cpp
+
+NOTE: Use E as the operation to indicate end of input.
