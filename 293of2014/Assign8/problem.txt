@@ -1,0 +1,40 @@
+			A Game on Binary trees.
+
+This is an algorithmic problem that shows the use of recursion for binary trees.
+A binary tree is said to be proper if every non-leaf node has two children.
+Given an arbitrary binary tree, we can get a proper binary tree by replacing
+every empty tree by a node, called an external node.
+
+The input for this problem is a proper binary tree whose external nodes are
+colored either black or white. Two players White and Black, play a game on 
+this tree. Initially a coin is placed on the root node of the tree. At each
+move a player moves the coin to one of the children of the current node having
+the coin. The game ends when a leaf (external) node is reached. If the leaf 
+node reached is colored White, then White wins the game, otherwise Black wins
+the game. The first move is always made by White.
+
+Given the tree and the coloring of the leaf nodes, you have to determine
+which of the two players has a winning strategy. A player has a winning 
+strategy if the player can guarantee a win, irrespective of how the other
+player plays. Also find the minimum total number of moves that guarantee that
+the player with a winning strategy will win the game in those many moves.
+
+Suppose we want white to have a winning strategy. Find the minimum number of
+leaf nodes that must be colored white for this to happen.
+
+Input Format.
+
+The input is a binary tree whose nodes are numbered 0 to n-1.
+The first line specifies n, the total number of nodes. The root node is
+always numbered 0. The next n lines specify the left and right children of the
+nodes. A line will contain 3 integers i, j, k which specify that the left
+child of i is j, and the right child is k.
+If i is a leaf node, j = l = -1 if it is colored white, and j = k = -2
+if it is colored black.
+
+Output
+Output a single line containing the string "White" or "Black", and two
+integers, the minimum number of moves for winning, and the minimum number
+of leaf nodes to be colored White for White to have a winning strategy.
+
+Submit as RollNo_8.cpp

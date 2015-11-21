@@ -1,0 +1,72 @@
+			Problem D  (ACM ICPC World Finals 2012).
+			Fibonacci Words
+			Problem ID: fibonacci
+
+The Fibonacci word sequence of bit strings is defined as:
+F(0) =  0
+F(1) =  1
+F(n) =  F(n-1) + F(n-2) if n >= 2.
+Here + denotes concatenation of strings. The first few elements are:
+
+n F(n)
+0 0
+1 1
+2 10
+3 101
+4 10110
+5 10110101
+6 1011010110110
+7 101101011011010110101
+8 1011010110110101101011011010110110
+9 1011010110110101101011011010110110101101011011010110101
+
+Given a bit pattern p and a number n, how often does p occur in F(n)?
+
+Input
+The first line of each test case contains the integer n (0 <= n <= 100). The second line contains the bit
+pattern p. The pattern p is nonempty and has a length of at most 100000 characters.
+
+Output
+For each test case, output the number of occurrences of the bit pattern p in
+F(n), one per line. Occurrences may overlap. The number of occurrences will be less than 2^63.
+
+Sample Input                                    Output for Sample Input
+6							5
+10							8
+7							4
+10							4
+6							7540113804746346428
+01
+6
+101
+96
+10110101101101
+
+Algorithm
+
+The algorithm is a simple recursive one, based on another way of looking at the Fibonacci words.
+It can be seen that F(n)  for n >= 1, can be obtained from F(n-1) by substituting every
+occurrence of 0 in F(n-1) by 1, and every occurrence of 1 by 10.
+This gives the same sequence:
+0, 1, 10, 101, 10110, 10110101, ...
+
+This rule gives a simple way of relating the number of occurrences of a pattern p in F(n),
+to the number of occurrences of some smaller patterns in F(n-1).
+
+Consider, for example, 01. This can occur in F(n) from an occurrence of 10 or 11 in F(n-1).
+Moreover, they are distinct occurrences, so the total number of occurrences of 01 in F(n)
+is the sum of the number of occurrences of 10 and 11 in F(n-1).
+
+Similarly, for the pattern 10110101101101, the number of occurrences in F(n) is the sum of
+the number of occurrences of 101101010 and 101101011 in F(n-1). The base case is when the
+pattern has length 1. 0 occurs f(n-2) time in F(n) and 1 occurs f(n-1) times, where f(n) is
+the nth Fibonacci number. Note that patterns such as 00 or 111 never occur. Similarly,
+a pattern of length > f(n) cannot occur in F(n). Use this to write a simple recursive
+program. 
+
+
+
+
+The test cases are available at www.cse.iitb.ac.in/~aad/cs293/Assign5
+Submit your file as RollNo_5.cpp
+

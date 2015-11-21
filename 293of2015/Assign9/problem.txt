@@ -1,0 +1,94 @@
+The problem here is to build a class to represent Boolean functions
+of n variables using binary trees. One such representation is to use
+what are called Ordered Binary Decision Diagrams. These are just
+proper binary trees, where every internal node stores a variable and
+every external node stores a value 0 or 1. 
+
+A constant function is represented by a single node containing the
+value of the function (0 or 1). Any function of n variables can be written
+as x_1'.f_1 + x_1.f_2 where f_1, f_2 are functions of n-1 variables.
+The binary tree representing this function will have a root node
+containing the variable x_1, with left subtree representing the function
+f_1 and right subtree representing the function f_2. If the function
+does not depend on the variable x_1, that is f_1 = f_2, then we do not
+have the node containing x_1, and the representation is just the
+representation of f1.
+
+This representation can be chosen such that all variables in a path
+in the tree are distinct and come in increasing order, assuming they
+are numbered 1 to n.
+
+
+The following operations on Boolean functions represented by such
+binary trees should be implemented.
+
+1 Boolean operations and, or and not. These should modify the function
+  to which they are applied, rather than returning new functions.
+
+2. Reading and writing the function in sum of product form. 
+
+3. Substitute a variable x_i by a true or false value.
+
+4. Copy constructor, assignment and equality operator, and destructor.
+
+
+Define a class boolfunc
+with the following public member functions:
+
+boolfunc() - constructor that does nothing
+~boolfunc() - destructor that should free all allocated memory
+boolfunc( boolfunc const &) - copy constructor
+void operator+=(boolfunc const &)- or operator
+void operator*=(boolfunc const &) - and operator
+void operator~() - not operation
+bool operator==(boolfunc const &) - check for equality.
+void read() - reads the function in sum of products form and
+              constructs it binary tree representation.
+			  You can read from cin.
+			  The input format will be as follows.
+			  The first line will give the number of terms.
+			  For each term, the first line will give the
+			  number of literals in the term.
+			  The second line of a term will contain the
+			  numbers of the variables that appear in the
+			  term, in increasing order of number. If a
+			  variable is in complemented form, it will
+			  be represented by a negative number.
+			  For example:
+			  2
+			  2
+			  -1 2
+			  2
+			  1 -3
+			  denotes the function x_1'x_2 + x_1x_3'
+
+              The ordering of the terms should be the lexicographic
+			  ordering of the literals in the terms (Terms including
+			  x_1' should come  before terms including x_1). You need not
+			  do any minimization of the formula.
+
+
+void print() - prints out the function in the same format as
+               the input.
+void subst(int i, bool v)- modifies the function by setting the value
+                        of x_i to v. This will be a new function
+						independent of x_i.
+
+Note: you may also need some private functions to make a copy of
+a binary tree, and to destroy a tree (if you use pointers),
+and check equality of trees. If both subtrees of a node are
+equal, then the node can be deleted and replaced by a single copy
+of one of the subtrees. This reduces the size of the tree.
+All operations should take O(m) time, where m is the size of the
+tree. In general, this can be exponential in n, the number of
+variables. 
+
+You will also need to define a node type private to the class.
+You can use numbers 1 to n to indicate variables, 0 for false,
+and -1 for true. No need to distinguish between internal and external
+nodes.
+
+Do not write any main program.
+Submit your file as RollNo_9.cpp
+
+NOTE; For reducing the tree, you can use a simple O(m^2) time algorithm. Reduce the left and right subtrees and check for equality. If equal , destroy one of the trees and return the other.

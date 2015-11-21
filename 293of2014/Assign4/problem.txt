@@ -1,0 +1,76 @@
+Surveillance (Problem K from ACM ICPC World Finals, 2014)
+
+Time Limit: 4 seconds
+
+The International Corporation for Protection and Control (ICPC) develops efficient technology for, well,
+protection and control. Naturally, they are keen to have their own headquarters protected and controlled.
+Viewed from above, the headquarters building has the shape of a convex polygon. There are several
+suitable places around it where cameras can be installed to monitor the building. Each camera covers a
+certain range of the polygon sides (building walls), depending on its position. ICPC wants to minimize
+the number of cameras needed to cover the whole building.
+
+Input
+The input consists of a single test case. Its first line contains two integers n and k (3 <= n <=10^6 and
+1 <= k <= 10^6), where n is the number of walls and k is the number of possible places for installing
+cameras. Each of the remaining k lines contains two integers ai and bi (1 <= ai; bi <= n). These integers
+specify which walls a camera at the ith place would cover. If ai <= bi then the camera covers each wall j
+such that ai <= j <= bi. If ai > bi then the camera covers each wall j such that ai <= j <= n or 1 <= j <= bi.
+
+Output
+Display the minimal number of cameras that suffice to cover each wall of the building. The ranges
+covered by two cameras may overlap. If the building cannot be covered, display impossible instead.
+
+Sample Input 1 Sample Output 1
+100 7                 3
+1 50
+50 70
+70 90
+90 40
+20 60
+60 80
+80 20
+
+Sample Input 2 Sample Output 2
+8 2               impossible
+8 3
+5 7
+
+Sample Input 3 Sample Output 3
+8 2                  2
+8 4
+5 7
+
+Sample Input 4 Sample Output 4
+12 4                 3
+1 6
+5 8
+5 9
+10 12
+
+The test cases from the ICPC along with the answers are available at
+www.cse.iitb.ac.in/~aad/cs293/Assign4
+
+
+Outline of Algorithm.
+
+1. Sort the arcs based on non-decreasing a_i and for equal a_i non-increasing b_i.
+
+2. Use the sorted order to delete redundant arcs, those that are contained in others.
+   You only need to check for consecutive arcs in sorted order (including last and
+   first). (If only one arc remains, return the answer.)
+
+3. For each remaining arc A in sorted order, find the next arc that must be selected if
+   arc A is selected. This will be the arc furthest to the right of A in sorted order,
+   that includes point b_i+1, where b_i is the right endpoint of a. (If there is no
+   such arc, a solution is impossible.)
+   This can be represented by a simple vector next, where next[i] gives the next arc
+   to be selected if arc i is selected.
+ 
+
+4. Find the arc i for which next[i]-i is minimum. For each arc j such that i <= j <= next[i],
+   select j and keep on selecting next j until all points are covered. take the minimum
+   number selected over all j.
+    
+
+Submit your file as RollNo_4.cpp
+PLEASE DO NOT TAR OR ZIP.

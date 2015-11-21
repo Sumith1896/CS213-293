@@ -1,0 +1,15 @@
+Link to the ICPC problem: https://icpc.kattis.com/problems/ship
+
+If you solve the problem as given, you will get about half the marks.
+
+As an extension, for each input, print the answer if the number of lanes was i, for all 1 <= i <= n, rather than considering all n lanes. There will be n answers for each input, considering only the ships in the first i lanes, for 1 <= i <= n. There is no change in input format or time limit. The time limit is 3 sec but it takes less than 0.5 seconds for the test data.
+
+Print the answer up to 8 decimal digits.
+
+The test cases from the ICPC are available at www.cse.iitb.ac.in/~aad/cs293/Assign8
+
+
+
+Note: Simple algorithm for the basic problem. For every ship, there is a forbidden time interval during which the ferry cannot start. Find this for each ship. The union of all of these is forbidden as a starting time for the ferry. The largest gap between the intervals in the union, that lies between t1 and t2 is the answer.
+
+To find these, simply sort all intervals by their starting points and do one left to right pass on the vector of sorted intervals.

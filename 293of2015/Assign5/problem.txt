@@ -1,0 +1,97 @@
+			Sorting and Ranking.
+
+Suppose there are n contestants and 3 judges. Each judge independently
+ranks the contestants from 1 to n, assigning a unique rank to each 
+contestant. The problem is to determine whether there exists a consistent
+ranking of the contestants. A ranking is said to be consistent, if for any
+two contestants i and j, i has a higher rank than j if and only if i is 
+ranked higher than j by at least two of the three judges.
+
+More formally, suppose the contestants are numbered 1 to n. We are given 3
+permutations of 1,2,..,n which give the rankings by the 3 judges.  A 
+permutation p_1, p_2,....,p_n indicates that contestant p_1 is ranked 
+first by the judge, p_2 is second, and p_n is last. The problem is to 
+determine if there exists a permutation q_1,..,q_n of 1,2,...,n such that 
+if i occurs before j in q_1,q_2,...,q_n, then i must occur before
+j in at least two of the given permutations, for all i,j.
+
+If such a permutation exists, it can be found simply by sorting. Define a
+relation < on the contestants, by i < j if i occurs before j in at least 
+two of the given permutations.  The < condition can be checked in O(1) time,
+by constructing the inverses of the permutations, and a standard sort
+algorithm used to get this in O(nlog n) time. However, even if a consistent 
+ranking does not exist, this will give some permutation. The problem is that
+the < relation need not be transitive. A simple way of checking the 
+consistency of the obtained permutation is by considering all pairs i and j.
+But this will take O(n^2) time.  If you implement this, it should work for 
+a few cases.
+
+There is an O(nlog n) time algorithm for checking the consistency, which
+is somewhat similar to  merge-sort. First, without loss of generality, 
+assume that one of the permutations is 1,2,..,n. So we have only two 
+permutations. An inversion pair in a permutation is a pair of numbers 
+(p_i,p_j) such that i < j but p_i > p_j.
+The problem now reduces to the following:
+Given two permutations p_1, p_2,...,p_n and q_1, q_2, .., q_n, is there a
+permutation r_1, r_2,...,r_n such that the set of inversion pairs in r is
+exactly the intersection of the inversion pairs in p and q. As we have seen,
+if such an r exists, it can be found by sorting as above. We only need to 
+check whether a given r satisfies this property.
+
+This checking can be done in two steps. First check that every inversion
+pair in r is an inversion pair in p, and also an inversion pair in q. This 
+can be done by a merge-sort like algorithm in O(nlog n) time. Then check 
+that the total number of common inversion pairs in p and q is equal to the 
+total number of inversion pairs in r. The number of common inversion pairs 
+in p and q can be computed from the number of inversion pairs in p, q and s,
+where s is the permutation such that q_i = p(s_i).
+
+Note that a consistent ranking does not exist iff there are 3 contestants
+i, j, k such that i < j, j < k and k < i, where < is as defined above.
+
+Input format
+The first line of input will specify n, the number of contestants.
+The next two lines will specify two permutations of 1,2,..,n. Each line
+will contain n numbers separated by a space. It can be assumed that the
+third permutation is always 1,2,...,n.
+
+Output Format
+If a consistent ranking exists, output "consistent" on one line, followed
+by the consistent permutation, with n numbers on a line separated by a 
+space.  If no such ranking exists, output "inconsistent" on one line, 
+followed by 3 numbers i, j, k such that i < j, j < k and k < i, on one 
+line separated by a space (< as defined above).
+Examples:
+Input 1             Output 1
+6                   consistent
+1 3 5 2 4 6         1 2 3 4 5 6
+2 4 6 1 3 5
+
+Input 2             Output 2
+6                   inconsistent
+4 2 6 1 5 3         1 3 6
+4 2 3 6 1 5
+
+Submit your program as RollNo_5.cpp
+
+For homework, try to generalize to the case where there are 2k+1 judges.
+Hint for the algorithms:
+
+For counting inversion pairs, follow merge-sort, and keep a count of no of
+inversion pairs found so far. When merging, keep a count of the number
+of right-half numbers that have been inserted in the merged list.
+Whenever a left-half number is inserted, it forms an inversion pair
+with all the already inserted right-half numbers. So add count to the
+total count. Increment count when a right half number is inserted in
+the merged list.
+
+For checking that all inversion pairs in permutation p are also in q,
+follow the same procedure. Keep track of the minimum position in q
+of the right-half numbers of p, that have been inserted in the merged
+list. When a left-half number of p is inserted, it must be to the left of
+all these in q. When a right-half number is inserted, update the
+leftmost position.
+
+Note that the permuatation s can be defined by s[i] = invq[p[i]], or invp[q[i]].
+Then the number of common inversion pairs in p and q is the (number in p + number in q - number in s)/2.
+Try to argue this out.

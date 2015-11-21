@@ -1,0 +1,58 @@
+				Binary trees
+1. Consider a binary tree whose nodes are numbered 1 to n arbitrarily.
+   A tree traversal is a particular way of "visiting" or ordering the
+   nodes of the tree. An inorder traversal is defined by
+
+   inorder(empty) = empty
+   inorder((r,T_l,T_r)) = inorder(T_L) + r.num + inorder(T_R)
+
+   Here + denotes concatenation of sequences of node numbers and r.num
+   is the number of the node r.
+
+   Similarly, preorder and postorder are defined by
+
+   preorder(empty) = empty
+   preorder((r,T_L,T_R)) = r.num + preorder(T_L) + preorder(T_R)
+
+   postorder(empty) = empty
+   postorder((r,T_L,T_R)) = postorder(T_L) + postorder(T_R) + r.num
+
+
+   Given the inorder and preorder traversals of a binary tree, show
+   how to reconstruct the tree in O(n) time. Show that two different
+   trees can give the same preorder and postorder traversal.
+
+   Given two permutations p1, p2 of 1 to n, determine in O(n) time
+   whether they are the preorder and postorder traversals of some
+   binary tree.
+
+
+2. Suppose the numbers 1 to n are inserted in a empty binary search tree
+   in a specified order. Show how you can construct the final resulting
+   binary search tree in O(nlog n) time. Assume that no balancing is done
+   and the standard insertion procedure is used. Show that a complete 
+   binary search tree containing the same numbers can be constructed in 
+   O(n) time.
+
+3. Suppose you are given 2 binary search trees that represent disjoint
+   sets. Show how you can construct a binary search tree representing
+   the union of the two sets in time O(h + n) where h is the height
+   of the first tree and n is the number of nodes in the second tree.
+   If both trees are red-black trees, can you ensure that the result
+   is also a red-black tree, in the same time.
+
+
+4. The rarity of a sequence of integers is the number of integers that
+   occur exactly once in the sequence. Given a sequence of integers, it is 
+   required to find a substring of the sequence that has maximum rarity.
+   Show how this can be done in O(nlog n) time. Note that a substring
+   must contain consecutive elements of the original sequence.
+
+5. A sequence b_0, b_1, b_2, ..., b_{m-1} of bits is said to be 
+   non-decreasing if b_i <= b_{i+1) for all 0 <= i < m-1.
+   Let a_0, a_1, ..., a_{n-1} be an arbitrary sequence of bits.
+   It is required to find L[i,j] for a given collection of m pairs of
+   indices (i,j) such that i <= j, where L[i,j] is the length of the
+   longest non-decreasing subsequence of the substring a_i,...,a_j. 
+   Show how this can be done in O(mlog n) time.
+   

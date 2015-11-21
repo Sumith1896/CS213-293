@@ -1,0 +1,60 @@
+			Sets and Maps.
+
+
+This assignment shows the use of sets and maps in efficient data structures.
+The problem is again to represent sequences of integers, but with a
+different set of operations.
+
+The operations required are:
+
+
+Sequence(vector<int> const & v)
+
+A constructor that constructs a sequence whose value is given by the vector
+v.
+
+S(i,x);
+
+Assigns integer x as the value of S[i].
+
+bool is_subsequence(vector<int> const & q)
+
+returns true iff the given query vector q is a subsequence of the sequence.
+
+The Sequence itself may be very long, say 10^6 integers, but in general,
+the query vector q for the is_subsequence operation will be much shorter,
+say at most 10^4 elements. The problem is to perform the assignment
+operation in O(log n) time, and the subsequence query in O(|q|log n) time.
+
+The sequence is represented as a map from int to set of int, where for each
+integer, the set stores the indices at which the integer occurs in the
+sequence. At most n integers would have a non-empty value for this
+set. The operations on the sequence can be implemented easily using
+basic set/map operations. Some details of these can be found at
+
+http://www.cse.iitb.ac.in/~aad/cs213/STL_doc/table_of_contents.html
+
+
+If you complete this, try to also solve the following problems. These will
+not be evaluated.
+
+Given a query vector q, find the shortest substring of the Sequence that 
+contains q as a subsequence, if it exists. This should take O(nlog n) time.
+
+In  some applications, we need q to occur as a subsequence such that
+consecutive elements are not too far apart. Given a number k, determine
+if q occurs as a subsequence such that consecutive elements of q are
+separated by at most k places in the original sequence. Note that if
+k = 1, this is just the pattern matching problem, that q must occur
+as a substring, rather than subsequence. Show that for any k, this can
+be done in O(nlog n) time. Can you do it in O(kn) time?
+
+
+Submission.
+
+Write a class Sequence which has a constructor that takes a vector of
+integers as a parameter,  an operator() that takes i and x and assigns
+S[i] = x, and a method is_subsequence(vector<int> & q) that return true
+iff q is a subsequence of the sequence.
+
+Write only the class and remove any main function. Submit as RollNo_7.cpp

@@ -1,0 +1,33 @@
+				Efficient Algorithms.
+1. Let a_0, a_1, ..., a_{n-1} be a sequence of integers. A pair of
+numbers (a_i,a_j) is said to be a min-max pair if i < j and a_i <= a_k
+<= a_j for all i <= k <= j.  In other words, a_i is the min of the
+numbers from a_i to a_j and a_j is the max of these numbers.
+Describe an O(n) time algorithm to find a min-max pair (a_i,a_j) such that
+j-i is maximized. (Hit use stacks.) Find the number of min-max pairs
+in the given sequence in O(nlog n) time. (Use Merge-sort).
+
+
+2. Let A be a n by m matrix whose entries are 0 or 1. Describe an O(nm)
+time algorithm to find a submatrix with all entries 1 and having the
+maximum possible number of entries. Note that a submatrix of A consists
+of a set of consecutive rows and columns of A. (Hint: Go row by row,
+and for every entry in each row, find the largest rectangle with all 1's
+which contains that entry, but not the one below it. This can be done
+in O(1) time, using a problem done in class.)
+
+3. A sequence of integers is said to be smooth if any two consecutive
+integers differ by at most 1. Given an arbitrary sequence of integers,
+describe an O(n^2) time algorithm to find the minimum number of
+elements in the sequence whose value must be changed, so that the
+resulting sequence is smooth. Note that only changing of values is
+permitted and no insertion/deletion.
+
+4. Suppose you are given a set of n points in the plane, specified 
+by their x- and y-coordinates. Describe an O(n) time algorithm to
+find the number of pairs of points such  that the line passing through 
+the pair has slope 1. Describe an O(nlog n) time algorithm to find
+the number of pairs such that the slope of the line through the pair
+is in the interval [m1,m2], for some specified m1 and m2. (Hint:
+inversion pairs.)
+

@@ -1,0 +1,97 @@
+			Square-free strings.
+
+A string is said to be a square if it is of the form ww for some
+non-empty string w. Examples of squares are "aa" "abab" "abaaba" etc.
+A string s is said to be square-free if it has no substring which is
+a square. With 2 characters, the longest square-free string has length 3,
+aba or bab. With 3 characters, it is possible to get arbitrarily long,
+in fact, infinite square-free strings.
+
+In this problem, you have to read a string and check if it is square-free.
+If it has a square substring, you should find the length of the shortest
+non-empty string w such that ww is a substring of the given string.
+Also find the smallest position at which such a square substring occurs.
+If the string is square-free, output 0 0.
+
+There is a simple algorithm to test square-freeness. Consider each
+substring and check if it is followed by itself in the given string.
+There are (n-l+1) substrings of length l, and checking if any one
+is a square will take O(l) time. In the worst case, this can take
+O(n^3) time.
+
+There is an O(nlog n) time algorithm for this, which is described
+below. You should implement this. The simple algorithm will work
+for very few cases.
+
+The main idea is that we try to detect squares w of length between
+2l-1 to 4l-2, starting with l = 1. If not found, double the value
+of l, and repeat. We need to double l at most log n times.
+The main step is that for a given value of l, we can detect a square
+of length between 2l-1 to 4l-2 in O(n) time. Hence the total time
+is O(nlog n).
+
+Consider a particular step with l = 2^k. We reach this step only if
+a square of length <= 2^{k+1}-2 has not been found. We will find
+the shortest square whose length is between 2^{k+1}-1 to 2^{k+2}-2,
+if it exists.
+
+Divide the string into n/l blocks of length l each, except for the 
+last block, which may be arbitrary. If a square ww of length >= 2l-1
+exists, then the first occurrence of w must contain one of the blocks
+completely. This block must also occur in the 2nd occurrence of w,
+and if length of w is <= 4l-2, this must be at most 3l-2 characters
+away from the first occurrence.
+
+So for each of the n/l blocks, we search for a 2nd occurrence of
+the block at most 3l-2 characters to its right. The main idea is
+that 2 occurrences of any block of length l cannot overlap,
+otherwise there exists a square of length < l, and it would
+have been detected earlier.
+
+There can be at most 2 occurrences of the block within 3l-2
+characters of the first occurrence. For each such occurrence,
+we try to extend the substring on both sides of the occurrence
+of the block to see if we get a square. Keep track of the shortest
+square found for each block, and the earliest start position.
+
+
+The search for an occurrence of a block can also be implemented 
+in a simple manner.
+
+Consider the first block s[0],s[1],...,s[l-1].
+We start comparing s[0] with s[l], s[1] with s[l+1], and so on.
+Suppose s[i] != s[l+i]. Now we can directly start comparing
+s[0] with s[l+i]. This is because a substring of length <= l
+cannot have an overlapping occurrence, because there is no
+square of length < l.  Therefore processing each block takes O(l) time, 
+and since there are n/l blocks, total time is O(n). 
+
+Consider the first step with l = 1. In this case, we try to detect
+squares of length 1 or 2. Each block is a single character.
+If the next character is same, we get a square of length 1.
+If the next to next character is the same, we see if the
+previous or next characters of the two occurrences are the same. 
+If so, we get a square of length 2. Repeat this for all characters.
+If no square is detected, set l = 2, and repeat.
+
+Input/Output format
+The input will be a single string of characters. You can read it using
+cin or scanf. The output should be two integers on a line separated
+by a space.  The first number is the length of the shortest string
+w such that ww is a substring. The second number is the earliest
+position at which such a substring occurs. If the string is
+square-free both numbers should be 0.
+
+Example
+Input 1       Output 1
+abcbcacab     2 1
+
+Input 2                                Output 2
+123213231213123132312132123            0 0
+
+
+Submit you file as RollNo_6.cpp
+
+Note that the second occurrence of a block need not be one of the blocks in which the string is divided.
+
+If the block being considered is s[i] s[i+1] ...s[i+l-1] then its second occurrence can be at any s[j] s[j+1]...s[j+l-1] for some i+2l-1 <= j <= i+4l-2. The block can occur at most twice from say i+2l-1 to i+3l-2 and i+3l-1 to i+4l-2.  The third occurrence will have to start after i+4l-1, and will not be considered.

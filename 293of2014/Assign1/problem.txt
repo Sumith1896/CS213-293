@@ -1,0 +1,69 @@
+			Assignment_1
+
+This is a problem on functions from {0,1,..,n-1} to itself. Let f be any such function. Consider
+the sequence f^0, f^1, f^2, ...., of such functions, where f^0 is the identity function, defined
+by f^0(x) = x for all 0 <= x < n, and f^i is defined by f^i(x) = f(f^{i-1}(x)). Since there are
+only finitely many such functions, this sequence has to repeat at some point. The problem is to
+compute the smallest values of i >= 0 and j > 0, for a given f, such that the function f^i equals 
+the function f^{i+j}.
+
+Suppose the numbers represent students in a class and f(x) denotes the closest friend of x in the
+class. It is required to select a subset R of students such that for every student x, at least one of 
+x and f(x) belongs to R. In other words, if a student is not selected then her closest friend must
+be selected. Given the function f, it is required to find the minimum number of students that must be
+selected, to satisfy this.
+
+
+Hints for solution: A simple way is to simply compute the sequence f^0, f^1, ..., and see when
+repetition occurs. However, in general, this will be very inefficient. A better way is to find
+for each x, the sequence f^0(x), f^1(x),....,. Again repetition must occur in this, but it
+will occur much before the repetition in the function. Can you use these values for all x, to
+compute i and j.
+
+For the second part, if y is not in the range of f, that is, y is not the closest friend of
+anybody, then there is no point in selecting y, and it is always preferable to select f(y).
+What happens if every y is in the range of f?
+
+
+Input
+
+The input will consist of the number n, followed by n numbers, each between 0 and n-1, specifying
+the values of f(x) for 0 <= x < n. n will be at most 1000.
+
+The numbers should be read using cin. (No files should be used).
+
+
+Output
+
+Output the 3 numbers i, j, and the minimum size of R, each on a separate line.
+
+Note that the outputs will be checked by a program, so take care to format properly.
+
+
+
+Example 1
+Input
+10
+3 2 4 3 0 2 1 5 2 4
+
+Output
+5
+1
+5
+
+Example 2
+Input
+10
+4 1 6 3 0 8 5 2 7 9
+
+Output
+0
+10
+7
+
+
+Submission
+
+Submit by uploading your source file on Moodle. You should upload a single file named
+RollNo_AssignmentNo.cpp. For this time, it will be RollNo_1.cpp.
+Please follow this format.

@@ -1,0 +1,50 @@
+			Codes
+
+Let A be a set of character strings. Then A+ denotes the set of all possible 
+character strings that can be obtained by concatenating one or more strings
+in A. In other words, a string w is in A+ iff w = w_1. w_2. ... w_k for some
+k >= 1 and w_i in A for 1 <= i <= k. (Here . denotes concatenation.)
+
+The set A is called a code if every string w in A+ can be written in a unique 
+way as w = w_1.w_2. .... w_k.
+
+In this problem, given a set of strings, you have to determine whether it is a
+code or not. If it is not a code, there exists a string w that can be obtained
+by concatenating strings in A, in more than one way. You have to find the
+shortest possible such string. If there is more than one of the same length,
+find the lexicographically smallest string.
+
+Input
+The first line will contain n, the number of strings in the set A.
+The next n lines will contain the strings, one per line.
+You can assume the possible characters in the strings are small letters 
+'a' to 'z' only.
+
+Output
+Output CODE if the given set is a code, otherwise output the shortest and
+lexicographically smallest string that can be obtained in more than one way.
+
+
+Hint
+If no string in A is a prefix of any other string in A, then A must be
+a code. (Why?) Define an operator - on strings where w1 - w2 = w3 iff
+w1 = w2.w3, that is w2 is a prefix of w1 and w3 is obtained by deleting
+this prefix of w1. Use this operator to design an algorithm.
+Use good data structures for implementing the algorithm. A simple 
+implementation, that may take O(n^2) time, will work for at most half the
+cases.
+
+
+Examples
+Input		Output
+4
+a		CODE
+ab
+abb
+abbb
+
+
+3		ababababab
+aba
+bab
+abab

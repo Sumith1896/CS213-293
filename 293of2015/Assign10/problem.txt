@@ -1,0 +1,96 @@
+This problem involves implementation of an efficient data structure.
+You are given a fixed sequence of integers a_0, a_1,....,a_{n-1}.
+The only query to be answered is of the form distinct(i,j)
+which returns the number of distinct integers in the substring
+a_i,a_{i+1},...,a_j.
+
+A possible data structure that uses O(nlog n) space and initialization,
+and O(log n) query time, is described below. However, you can use
+O(n^2) time for initialization if needed, but this will not work
+for all cases.  YOU CAN ASSUME THAT n IS A POWER OF TWO for
+simplicity.
+
+
+First, by sorting the numbers, find for each a_i the previous occurrence
+of the same integer, that is let l(i) be the largest j such that
+j < i and a_j = a_i. Let l(i) be -1 if there is no such j. Note that
+l(i) is always < i.
+
+Now, the number of distinct numbers in the range [i,j] is j-i+1-k,
+where k is the number of numbers in a_0 to a_j for which the l value is
+>= i. This is exactly those numbers in a_i to a_j that have a duplicate
+occurrence in a_i to a_j. Note that numbers in a_0 to a_{i-1} will not
+have l value >= i.
+
+So the problem reduces to: Given i and j, find the number of numbers
+in l(0) to l(j) that are >= i. Use a segment tree like structure to
+answer this. Note that we will only work with the l array.
+
+
+At the root, we store an array that stores for each j, 0 <= j < n,
+the number of numbers in l(0) to l(j) that are >= n/2.
+If i is <= n/2, the entry in this array would be added to the total
+count of numbers otherwise it would not be.
+
+Now if i < n/2, we need to find the number of numbers in l(0) to l(j)
+that are in the range i to n/2-1, and if i > n/2, we need to find
+the number of numbers > i. One way would be to store 2 arrays,
+one keeping count of numbers in the range n/4 to n/2-1, and the other
+count of numbers >= 3n/4 for all values of j. But this would lead to O(n^2)
+space requirement and initialization.
+
+We can combine the two arrays in one, by observing that for each j,
+in at least one of the arrays, the number would be same as for j-1.
+So, if l(j) is >= n/2, we store only the number of numbers >= 3n/4
+at the jth location, and store in another array the largest index
+k such that k < j and l(k) < n/2. (-1 if there is no such).
+If l(j) is < n/2, we store count of numbers in the range n/4 to n/2-1,
+and the largest index k < j such that l(k) >= n/2;
+The same thing can be done recursively.
+
+So we need 2 arrays at each level and there will be log n levels.
+
+Consider the sequence 1 2 1 3 2 1 1 3 
+The l sequence is  -1 -1 0 -1 1 2 5 3
+
+At the first level one array would be 0 0 0 0 0 0 1 1 
+counting the number of numbers >= 4 in the prefix.
+The second array at the first level would be -1 -1 -1 -1 -1 -1 5 6
+
+Now for the next level, if we create separate arrays,
+they would be
+
+0 0 0 0 0 1 1 2  for numbers in [2,3] and 
+0 0 0 0 0 0 0 0  for numbers in [6,7]
+
+Merging them gives a single array 
+
+0 0 0 0 0 1 0 2 at level 2.
+
+So for example for computing N(3,6), from the first array we get 1 number
+>= 4. To find numbers in [0,3], since the number in 6 is >= 4,
+we look at the second array at level 1, where the index is 5.
+
+Now at 2nd level we want numbers in [3,3] that occur at index <= 5.
+Since 2nd level stores numbers >= 2, we do not add the count here.
+In the second array at level 2, since the l value at 5 is 2,
+we store the largest index < 5, at which a value 3 is stored.
+In this case, it is -1, so we can stop.
+
+First understand the data structure clearly.
+Try to construct the arrays recursively. It is okay if construction
+takes O(n^2) time, but the query should be answered in O(log n) time.
+
+
+Write a class distinct that stores the sequence, and answers the
+queries.
+
+It should have a constructor that takes a vector of integers as
+parameter and initializes the sequence.
+The only other method should be num_distinct that takes 2 int as
+parameter and returns the number of distinct integers in the
+substring.
+
+Submit your file as RollNo_10.cpp
+
+Note that at the first level, if l(j) = -1, we need  to store the largest k for which l(k) >= 0 and change the query (i,j) to (i,k).

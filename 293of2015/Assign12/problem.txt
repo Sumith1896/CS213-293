@@ -1,0 +1,58 @@
+			Graph Search.
+
+Consider a graph that represents a social network. The nodes represent 
+persons and an edge from node i to node j indicates that j is a friend
+of i. Friendship need not be symmetric.
+
+This problem models how social networks influence individual behaviour.
+Suppose a new movie has been released, and we want to know how many
+persons are likely to go for the movie.  For each person (node) i,
+a non-negative integer threshold t_i is assigned. The person will go
+for the movie if and only if at least t_i of his/her friends go for the 
+movie. Given the list of friends of each person, and the threshold
+values t_i, we want to find the minimum and maximum number of persons
+that will go for the movie.
+
+Note that a person with t_i = 0 will go for the movie irrespective
+of what his/her friends do, and a person with t_i > no. of friends
+will never go for the movie.
+
+Input Format
+The first line will specify n the number of nodes.
+The nodes are assumed to be numbered 0 to n-1.
+The next n lines will specify details of the n persons, in order.
+The ith line will contain integers
+t_i (the threshold value) n_i (the number of friends of ith person)
+and n_i integers giving the numbers of the friends of the ith person.
+The numbers will be separated by a space.
+
+Output Format
+Output the minimum and maximum possible number of persons that will
+go for the movie, on a single line separated by a space.
+
+
+Example
+Input
+5
+1 1 1
+2 2 2 4
+1 2 0 3
+0 2 2 4
+3 2 0 3
+
+Output
+2 2
+
+
+Algorithm
+Maintain a queue or stack of persons who will definitely go/ not go
+for the movie. While the queue or stack is not empty, pick a node
+from the queue/stack and for each predecessor, update the no. of friends 
+who will/ will not go. This may cause the predecessor to be added
+to the queue/stack. The algorithm should take O(n+m) time.
+n may be about 10^6 and m about 10^7.
+
+Submit your file as RollNo_12.cpp
+
+
+Some test cases will be put up at www.cse.iitb.ac.in/~aad/cs293/Assign12

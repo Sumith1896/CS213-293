@@ -1,0 +1,50 @@
+In this lab, you have to implement an efficient data structure for the
+following problem. Suppose there are n web pages and we want to keep track of
+how many times a web page is visited in some time duration.Also, we would
+like to know which are the most frequently visited web pages in that period.
+
+This can be done by a data structure that supports the following operations.
+There are n objects, numbered 0 to n-1, each of which will have an associated 
+count. The constructor should initialize n and all counts to 0. You may call
+the class `counter`.
+The other operations are
+
+1. increment(i) : Increment the count for the ith object.
+2. decrement(i) : Decrement the count for the ith object.
+3. reset(i) : Reset the count of ith object to 0.
+5. count(i) : Return the current count of ith object.
+4. findMax() : Return the maximum count of the objects.
+5. numMax() : Return the number of objects having maximum count.
+6. printMax() : Print the list of objects with maximum count, in the
+                order in which they achieved that count value.
+
+
+You have to implement a data structure that performs these operations in
+O(1) time independent of n, the number of objects, except the print
+operation that should take time proportional to the number of objects
+printed.
+
+If only the counts are stored in a vector, findMax will take O(n) time.
+So along with this, we maintain a list of lists. All objects with the
+same count value will be in the same list. We maintain a list of these
+lists for distinct count values, sorted according to the values of the 
+count. Additionally, a vector will store iterators into the list to
+identify the current position of the object. 
+
+An increment or decrement operation is performed by moving the object from
+its current list to the next (preceding) list with count value one more
+(less). If this list does not exist, it will have to be created and
+inserted in the list of lists. Similarly, if a list with a given count
+becomes empty, it would have to be deleted. For each object, you
+will need to know, which list of lists does it belong to, which can be
+done by storing an iterator into the main list, with each object.
+
+
+You have to implement a class that supports these operations.
+All variables should be private to the class, and only these methods
+should be public.  You can assume n may be about 100000, and the
+number of operations may be about 10^8.
+
+Note that your submitted file should not contain a main function. Only the
+class and its member functions should be defined.  Submit your file as
+Roll_No_4.cpp

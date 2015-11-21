@@ -1,0 +1,55 @@
+			Matrix class
+
+In this assignment, you have to write a matrix class and implement some
+operations on matrices. Note that your file must contain only the
+definition of the class and its methods, and no main program that uses 
+the class. (You can write one to test your class but remove it
+before submisison.)
+
+The values to  be represented are n x m matrices with integer entries,
+where n, m can be arbitrary numbers.
+
+The operations to be performed on the matrix are:
+
+0. Constructors that create a null matrix, a n x m matrix with 0 entries,
+   a copy constructor, a destructor.
+
+1. operators * and +, return the sum and product of two matrices.
+   You can assume their sizes are properly defined.
+
+2. operator ~ that returns the transpose of the matrix.
+
+3. The = operator that assigns one matrix to another.
+
+4. M(i,j) - the function call operator that returns a reference to the
+            ij th entry of the matrix.
+
+5. M(i,j,k,l) - returns the submatrix containing k consecutive rows and 
+                l columns, starting from the i,j th entry.
+
+6. M(i,j,A)- returns the matrix obtained by replacing the submatrix of
+             M, consisting of consecutive rows and columns, starting with 
+             the i,j th entry by the matrix A.
+	     You can assume that the size of M is large enough so that
+             matrix A fits in.
+
+SAMPLE USE
+
+Matrix A(10,10),B(10,20),C(20,10);
+
+A(3,5) = 10 + B(5,2);
+
+A = A + (~(B * C));
+
+A = A(5,5,B(3,4,2,3));
+
+
+
+
+
+SUBMISSION
+
+PLEASE UPLOAD A SINGLE FILE NAMED ROLLNO_2.cpp.
+Do not use tar or zip the files.
+Ensure that the syntax of the operators is correct.
+The name of the class must be Matrix.
